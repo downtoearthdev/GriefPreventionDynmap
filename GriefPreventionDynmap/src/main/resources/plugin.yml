@@ -9,7 +9,14 @@ commands:
     usage: "/setgpname <name>"
     description: "Sets the name of a GP claim"
     permission: gpd.setname
+  removegpname:
+    usage: "/removegpname"
+    description: "Removes the custom name of a GP claim"
+    permission: gpd.removename
 permissions:
   gpd.setname:
     description: Grants ability to set name of GP claims
+    default: op
+  gpd.removename:
+    description: Grants ability to remove name of GP claims
     default: op

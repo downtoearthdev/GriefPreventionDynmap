@@ -119,6 +119,7 @@ public final class GriefPreventionDynmap extends SamOatesPlugin {
             return;
         }
         this.getCommand("setgpname").setExecutor(new SetClaimNameCommand(m_griefPreventionPlugin));
+        this.getCommand("removegpname").setExecutor(new RemoveClaimNameCommand(m_griefPreventionPlugin));
         getClaimsField();
         loadGPNames();
 
@@ -401,6 +402,7 @@ public final class GriefPreventionDynmap extends SamOatesPlugin {
 
     private void saveGPNames() {
         File savedNames = new File(this.getDataFolder().getAbsolutePath() + File.separatorChar + "namesdb.yml");
+        savedNames.delete();
         YamlConfiguration claims = YamlConfiguration.loadConfiguration(savedNames);
         for(String key : loadedNames.keySet()) {
             claims.set(key, loadedNames.get(key));

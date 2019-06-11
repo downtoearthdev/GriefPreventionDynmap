@@ -8,29 +8,31 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SetClaimNameCommand implements CommandExecutor {
+public class RemoveClaimNameCommand implements CommandExecutor {
+
     private GriefPrevention gpPlugin;
 
-    public SetClaimNameCommand(GriefPrevention gpPlugin) {
+    public RemoveClaimNameCommand(GriefPrevention gpPlugin) {
         this.gpPlugin = gpPlugin;
     }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player) {
             Player sender = (Player)commandSender;
             for(Claim claim : GriefPreventionDynmap.claimsList) {
-                if(claim.contains(sender.getLocation(), true, false)) {
+                if(claim.contains(sender.getLocation(), true, false) && GriefPreventionDynmap.loadedNames.containsKey(claim.getID().toString())) {
                     if(claim.children != null) {
                         for(Claim child : claim.children) {
                             if(child.contains(sender.getLocation(), true, false)) {
-                                GriefPreventionDynmap.loadedNames.put(child.getID().toString(), String.join(" ", strings));
-                                sender.sendMessage(ChatColor.AQUA + "Set DynMap record of claim to " + String.join(" ", strings) + "!");
+                                GriefPreventionDynmap.loadedNames.remove(child.getID().toString());
+                                sender.sendMessage(ChatColor.AQUA + "Removed DynMap record of claim!");
                                 return true;
                             }
                         }
                     }
-                    GriefPreventionDynmap.loadedNames.put(claim.getID().toString(), String.join(" ", strings));
-                    sender.sendMessage(ChatColor.AQUA + "Set DynMap record of claim to " + String.join(" ", strings) + "!");
+                    GriefPreventionDynmap.loadedNames.remove(claim.getID().toString());
+                    sender.sendMessage(ChatColor.AQUA + "Removed DynMap record of claim!");
                     return true;
                 }
             }
