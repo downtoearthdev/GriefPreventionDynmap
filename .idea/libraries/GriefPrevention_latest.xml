@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="GriefPrevention-latest">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/GriefPreventionDynmap/lib/GriefPrevention-latest.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
